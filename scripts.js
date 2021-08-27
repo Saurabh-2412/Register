@@ -3,8 +3,11 @@ var modal = document.getElementById("myModal");
 var btn = document.getElementById("myBtn");
 var span = document.getElementsByClassName("close")[0];
 var loader = document.getElementById('loader');
+document.getElementById('subhobbies').disabled=true;
+
 loader.style.display = "none";
 
+//setting up modal visibility
 function modellingData() {
     modal.style.display = "block";
 }
@@ -17,6 +20,7 @@ window.onclick = function(event) {
     }
 }
 
+//fetching hobbies list
 fetch('https://apim.quickwork.co/ayyub/interview/v1/fetchhobbies', {
     method: "GET",
     headers: {"apikey": "m8bFhVGWZxPG97IZzkLLpUCPNkfPEZQC"}
@@ -41,7 +45,7 @@ fetch('https://apim.quickwork.co/ayyub/interview/v1/fetchhobbies', {
 function populate(s1,s2){
     var s1 = document.getElementById(s1);
     var s2 = document.getElementById(s2);
-
+    document.getElementById('subhobbies').disabled = false;
     s2.innerHTML = "";
     if(s1.value === "Playing Chess"){
         var subHobbies = ['Single Player','Multi player']
@@ -60,7 +64,7 @@ function populate(s1,s2){
     }
 }
 
-//calling post method
+//posting data 
 const thisForm = document.getElementById('myForm');
 thisForm.addEventListener('submit', async function (e) {
     e.preventDefault();
@@ -106,63 +110,3 @@ thisForm.addEventListener('submit', async function (e) {
         loader.style.display = "none";
     }
 });
-
-/* var normalizedArray = [];
-//Create and append the options
-for(var i = 0; i < normalizedArray.length; i++) {
-    var option = document.createElement("option");
-    option.value = normalizedArray[i].value;
-    option.text = normalizedArray[i].value;
-    myParent.appendChild(option);
-} */
-
-/* var text = document.createTextNode(data.hobbies[i]);
-option.appendChild(text);
-option.setAttribute("value",data.hobbies[i]);
-dropdown.insertBefore(option,dropdown.lastChild); */
-/* const url = 'https://apim.quickwork.co/ayyub/interview/v1/fetchhobbies';
-fetch(url, {
-    method: "GET",
-    headers: {"apikey": "m8bFhVGWZxPG97IZzkLLpUCPNkfPEZQC"}
-})
-.then(response => response.json()) 
-.then(json => Object.entries(json).forEach(([value]) => {
-    console.log(`${key}: ${value}`)
-}))
-.catch(err => console.log(err));
-console.log(normalizedArray); */
-
-//dropdown.length = 0;
-
-/* let defaultOption = document.createElement('option');
-defaultOption.text = '---Select---';
-defaultOption.value = '---Select---';
-
-dropdown.add(defaultOption);
-dropdown.selectedIndex = 0; */
-
-/* const url = 'https://apim.quickwork.co/ayyub/interview/v1/fetchhobbies';
-fetch(url, {
-    method: "GET",
-    headers: {"apikey": "m8bFhVGWZxPG97IZzkLLpUCPNkfPEZQC"}
-  })  
-.then(  
-    function(response) {  
-        if (response.status !== 200) {  
-            console.warn('Looks like there was a problem. Status Code: ' + response.status);
-            return;  
-        }
- 
-        response.json().then(function(data) {  
-            for (let i = 0; i < data.hobbies.length; i++) {
-                let option = document.createElement('option');
-                option.text = data.hobbies[i].value;
-                option.value = data.hobbies[i].value;
-                dropdown.add(option);
-            }    
-        });  
-    }  
-)
-.catch(function(err) {  
-    console.error('Fetch Error -', err);  
-}); */
