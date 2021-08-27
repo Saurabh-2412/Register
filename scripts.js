@@ -25,7 +25,7 @@ fetch('https://apim.quickwork.co/ayyub/interview/v1/fetchhobbies', {
     method: "GET",
     headers: {"apikey": "m8bFhVGWZxPG97IZzkLLpUCPNkfPEZQC"}
 })
-.then(response => response.json()) 
+.then(response => response.json())
 .then((json) => 
     {
         for(var i in json.hobbies)
@@ -39,7 +39,7 @@ fetch('https://apim.quickwork.co/ayyub/interview/v1/fetchhobbies', {
         }
     }
 )
-.catch(err => console.log(err));
+.catch(err => alert("Something went wrong please try again later",err));
 
 //populating sub category for hobbies
 function populate(s1,s2){
