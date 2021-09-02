@@ -40,7 +40,7 @@ export const SurveyOne = () => {
 
         setTimeout(() => {
             setShowPage(true)
-        }, 10000);
+        }, 3000);
 
         return(
             <div>
