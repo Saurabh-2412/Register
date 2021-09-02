@@ -4,6 +4,8 @@ const headers = {
     'apikey': 'm8bFhVGWZxPG97IZzkLLpUCPNkfPEZQC',
 };
 
+//const URL = `("https://apim.quickwork.co/ayyub/interview/v1/fetchhobbies",${headers})`
+
 async function fetchingHobbies () {
     try {
         const response = await axios.get("https://apim.quickwork.co/ayyub/interview/v1/fetchhobbies",{headers});
@@ -25,18 +27,21 @@ export const json =  {
             "elements": [
                 {
                     "type": "text",
-                    "name": "question1",
-                    "title": "User Name"
+                    "name": "name",
+                    "title": "User Name",
+                    "isRequired": true
                 },
                 {
                     "type": "text",
-                    "name": "question2",
-                    "title": "E-mail-ID"
+                    "name": "email",
+                    "title": "E-mail-ID",
+                    "isRequired": true
                 },
                 {
                     "type": "radiogroup",
-                    "name": "question3",
+                    "name": "gender",
                     "title": "Gender",
+                    "isRequired": true,
                     "choices": [
                         {
                             "value": "male",
@@ -54,21 +59,26 @@ export const json =  {
                 },
                 {
                     "type": "dropdown",
-                    "name": "question4",
+                    "name": "hobbies",
                     "title": "Hobbies",
                     "isRequired": true,
                     "requiredErrorText": "Something went wrong please try again later",
                     "choicesByUrl": {
                         "url": "https://hobbies.saurabhsharma11.repl.co/hobbies",
-                        //"url":`https://apim.quickwork.co/ayyub/interview/v1/fetchhobbies,${headers}`,
+                        //"url":"https://apim.quickwork.co/ayyub/interview/v1/fetchhobbies",headers:{ 'apikey': 'm8bFhVGWZxPG97IZzkLLpUCPNkfPEZQC' },
+                        /* "headers" : {
+                            'Content-Type': 'application/json',
+                            'apikey': 'm8bFhVGWZxPG97IZzkLLpUCPNkfPEZQC'
+                        }, */   
+                        //"url":URL,
                         "valueName": "value",
                         "titleName": "value"
                     }
                 },
                 {
                     "type": "dropdown",
-                    "name": "question5",
-                    "visibleIf": "{question4} = 'playing'",
+                    "name": "playingsubhobbies",
+                    "visibleIf": "{hobbies} = 'playing'",
                     "title": "Playing Sub Category",
                     "choices": [
                         {
@@ -87,8 +97,8 @@ export const json =  {
                 },
                 {
                     "type": "dropdown",
-                    "name": "question6",
-                    "visibleIf": "{question4} = 'Reading'",
+                    "name": "readingsubhobbies",
+                    "visibleIf": "{hobbies} = 'Reading'",
                     "title": "Reading Sub Category",
                     "choices": [
                         {
@@ -103,8 +113,9 @@ export const json =  {
                 },
                 {
                     "type": "dropdown",
-                    "name": "question7",
-                    "visibleIf": "{question4} = 'Writing'",
+                    "name": "writingsubhobbies",
+                    "isRequired": true,
+                    "visibleIf": "{hobbies} = 'Writing'",
                     "title": "Writing Sub Category",
                     "choices": [
                         {

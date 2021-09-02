@@ -4,7 +4,9 @@ import axios from 'axios';
 
 export const SurveyOne = () => {
     const [ showPage, setShowPage] = useState(true);
-    const onCompletePage = useCallback((data) => {
+    const [ loader, setLoader ] = useState("Loading...");
+
+    const onCompletePage = useCallback((data,loader) => {
         const headers = {
             'apikey': 'm8bFhVGWZxPG97IZzkLLpUCPNkfPEZQC',
             'Content-Type': 'application/json'
@@ -13,17 +15,20 @@ export const SurveyOne = () => {
         async function fetchingHobbies () {
             try {
                 const { status } = await axios.post("https://apim.quickwork.co/ayyub/interview/v1/submitdata",data,{headers});
+                alert(loader)
                 if(status === 200){
-                    if(data.question5 !== undefined){
-                        alert(data.question1 + " " + data.question2 + " " + data.question3 + " " + data.question4 + " " + data.question5);
-                    } else if(data.question6 !== undefined){
-                        alert(data.question1 + " " + data.question2 + " " + data.question3 + " " + data.question4 + " " + data.question6 );
-                    } else if(data.question7 !== undefined){
-                        alert(data.question1 + " " + data.question2 + " " + data.question3 + " " + data.question4 + " " + data.question7);
+                    if(data.playingsubhobbies !== undefined){
+                        alert( data.name + " " + data.email + " " + data.gender + " " + data.hobbies + " " + data.playingsubhobbies);
+                    } else if(data.readingsubhobbies !== undefined){
+                        alert(data.name + " " + data.email + " " + data.gender + " " + data.hobbies + " " + data.readingsubhobbies );
+                    } else if(data.writingsubhobbies !== undefined){
+                        alert(data.name + " " + data.email + " " + data.gender + " " + data.hobbies + " " + data.writingsubhobbies);
                     }
                     setShowPage(!showPage)
+                    setLoader();
                 }
             } catch (err) {
+                alert("Something went wrong, please try again later..!");
                 console.log(err);
             }
         }
@@ -32,16 +37,23 @@ export const SurveyOne = () => {
     },[showPage])
 
     const settingFeedbackPage = () => {
+
+        setTimeout(() => {
+            setShowPage(true)
+        }, 10000);
+
         return(
-            <main>
-                <h1>Thank you for taking survey</h1>
-            </main>
+            <div>
+                <main>
+                    <h1>Thank you for taking survey</h1>
+                </main>
+            </div>
         )
     }
 
     return(
         <div className="App">
-            {showPage? <MySurvey showCompletedPage={ data => onCompletePage(data) }/> : settingFeedbackPage()}
+            {showPage? <MySurvey showCompletedPage={ data => onCompletePage(data,loader) }/> : settingFeedbackPage()}
         </div>
     )
 }
